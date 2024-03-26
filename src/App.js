@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UpdateForm from "./components/edit";
+import Button from 'react-bootstrap/Button';
+
+
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -54,11 +57,7 @@ function App() {
       ) : (
         <>
           <div className="text-center">
-            <Link to="/create">
-              <button onClick={addData} type="button" className="btn btn-success m-2">
-                Add +
-              </button>
-            </Link>
+            <Button>Add+</Button>
           </div>
           <h1 className="text-center">Users List</h1>
           <table className="table">
