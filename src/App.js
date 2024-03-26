@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UpdateForm from "./components/edit";
-import Button from 'react-bootstrap/Button';
-
-
+import Button from "react-bootstrap/Button";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -24,10 +22,8 @@ function App() {
       });
   }, []);
 
-
-  function addData (user){
-    setUsers(...users,user);
-
+  function addData(user) {
+    setUsers(...users, user);
   }
 
   const handleUpdate = (userId, updatedData) => {
@@ -35,20 +31,21 @@ function App() {
       user.id === userId ? { ...user, ...updatedData } : user
     );
     setUsers(updatedUsers);
-  
+
     alert("Updated User Data:", updatedData);
   };
 
   const handleDelete = (userId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
     if (confirmDelete) {
       const updatedUsers = users.filter((user) => user.id !== userId);
       setUsers(updatedUsers);
-    
+
       alert("Deleted");
     }
   };
-
 
   return (
     <div className="container">
@@ -57,7 +54,7 @@ function App() {
       ) : (
         <>
           <div className="text-center">
-            <Button>Add+</Button>
+            <Button>Add New Data</Button>
           </div>
           <h1 className="text-center">Users List</h1>
           <table className="table">
