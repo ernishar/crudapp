@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import UpdateForm from "./components/edit";
-import Button from "react-bootstrap/Button";
+import AddUser from "./components/Add";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -23,7 +22,7 @@ function App() {
   }, []);
 
   function addData(user) {
-    setUsers(...users, user);
+    setUsers([...users, user]);
   }
 
   const handleUpdate = (userId, updatedData) => {
@@ -54,7 +53,7 @@ function App() {
       ) : (
         <>
           <div className="text-center">
-            <Button>Add New Data</Button>
+            <AddUser addData={addData} />
           </div>
           <h1 className="text-center">Users List</h1>
           <table className="table">
