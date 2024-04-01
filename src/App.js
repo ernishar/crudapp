@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import UpdateForm from "./components/edit";
+import AddUser from "./components/Add";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -21,10 +21,8 @@ function App() {
       });
   }, []);
 
-
-  function addData (user){
-    setUsers(...users,user);
-
+  function addData(user) {
+    setUsers([...users, user]);
   }
 
   const handleUpdate = (userId, updatedData) => {
@@ -32,20 +30,21 @@ function App() {
       user.id === userId ? { ...user, ...updatedData } : user
     );
     setUsers(updatedUsers);
-  
+
     alert("Updated User Data:", updatedData);
   };
 
   const handleDelete = (userId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
     if (confirmDelete) {
       const updatedUsers = users.filter((user) => user.id !== userId);
       setUsers(updatedUsers);
-    
+
       alert("Deleted");
     }
   };
-
 
   return (
     <div className="container">
@@ -54,11 +53,7 @@ function App() {
       ) : (
         <>
           <div className="text-center">
-            <Link to="/create">
-              <button onClick={addData} type="button" className="btn btn-success m-2">
-                Add +
-              </button>
-            </Link>
+            <AddUser addData={addData} />
           </div>
           <h1 className="text-center">Users List</h1>
           <table className="table">
@@ -90,6 +85,7 @@ function App() {
                   <td>{user.phone}</td>
                   <td>{user.age}</td>
                   <td>
+                    <a href="#update">
                     <button
                       type="button"
                       className="btn btn-primary m-2"
@@ -97,6 +93,7 @@ function App() {
                     >
                       Update
                     </button>
+                    </a>
                     <button
                       type="button"
                       className="btn btn-danger m-2"
@@ -110,7 +107,7 @@ function App() {
             </tbody>
           </table>
           {selectedUser && (
-            <div className="mt-4">
+            <div className="mt-4" id="update">
               <h2 className="text-center">Update User</h2>
               <UpdateForm user={selectedUser} onUpdate={handleUpdate} />
             </div>
