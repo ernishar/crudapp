@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import UpdateForm from "./components/edit";
 import AddUser from "./components/Add";
+import { Link } from "react-router-dom";
 
 function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3MTE5NTE0MTAsImV4cCI6MTcxMTk1NTAxMH0.jYWawa64TtbaaV-b0kAQgFg9rQYiQ9OaoTaEYsFr9Ro"
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://dummyjson.com/users")
+    fetch(`http://localhost:5000/api/all`,
+    header:{
+      authorization:token,
+      Accept: 'application/json',
+    })
       .then((response) => response.json())
       .then((data) => {
-        setUsers(data.users);
+        setUsers(data);
+        console.log(data)
+        
         setLoading(false);
       })
       .catch((error) => {
@@ -52,9 +60,11 @@ function App() {
         <p>Loading data...</p>
       ) : (
         <>
+        <Link >
           <div className="text-center">
             <AddUser addData={addData} />
           </div>
+          </Link>
           <h1 className="text-center">Users List</h1>
           <table className="table">
             <thead>
@@ -63,8 +73,8 @@ function App() {
                 <th>Avatar</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Phone</th>
-                <th>Age</th>
+                <th>Hobbies</th>
+                <th>Gender</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -74,7 +84,7 @@ function App() {
                   <td>{user.id}</td>
                   <td>
                     <img
-                      src={user.image}
+                      src={user.profilePic}
                       alt="User Avatar"
                       width="100"
                       height="70"
@@ -82,8 +92,8 @@ function App() {
                   </td>
                   <td>{`${user.firstName} ${user.lastName}`}</td>
                   <td>{user.email}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.age}</td>
+                  <td>{user.hobbies}</td>
+                  <td>{user.gender}</td>
                   <td>
                     <a href="#update">
                     <button
