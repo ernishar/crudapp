@@ -85,6 +85,7 @@ function App() {
                   <td>{user.phone}</td>
                   <td>{user.age}</td>
                   <td>
+                    <a href="#update">
                     <button
                       type="button"
                       className="btn btn-primary m-2"
@@ -92,6 +93,7 @@ function App() {
                     >
                       Update
                     </button>
+                    </a>
                     <button
                       type="button"
                       className="btn btn-danger m-2"
@@ -105,7 +107,7 @@ function App() {
             </tbody>
           </table>
           {selectedUser && (
-            <div className="mt-4">
+            <div className="mt-4" id="update">
               <h2 className="text-center">Update User</h2>
               <UpdateForm user={selectedUser} onUpdate={handleUpdate} />
             </div>

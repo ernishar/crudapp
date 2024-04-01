@@ -8,7 +8,6 @@ export default function AddUser({ addData }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [inputData, setInputData] = useState({
-    id: "",
     profileUrl: "",
     firstName: "",
     lastName: "",
@@ -31,7 +30,7 @@ export default function AddUser({ addData }) {
         addData(data);
         handleClose();
         setInputData({
-          id: "",
+          
           profileUrl: "",
           firstName: "",
           lastName: "",
@@ -41,6 +40,7 @@ export default function AddUser({ addData }) {
         });
 
         alert("Data Added Successfully");
+        navigat('/')
       })
       .catch((error) => {
         console.error("Error:", error); // Log any errors
@@ -57,20 +57,9 @@ export default function AddUser({ addData }) {
           backdrop="static"
           keyboard={false}
         >
-          <Modal.Header closeButton>Post</Modal.Header>
+          <Modal.Header closeButton className="text-center"> Fill User Details</Modal.Header>
           <form className="p-3" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="id"> User ID</label>
-              <input
-                type="text"
-                name="id"
-                className="form-control"
-                value={inputData.id}
-                onChange={(e) =>
-                  setInputData({ ...inputData, id: e.target.value })
-                }
-              />
-            </div>
+           
             <div>
               <label htmlFor="profileUrl"> Profile Image URL</label>
               <input
